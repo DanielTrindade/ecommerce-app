@@ -14,15 +14,25 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
+  usersService: UsersService;
   constructor(private prisma: PrismaService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return 'this action adds a new user';
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
   findAll() {
     return this.prisma.user.findMany();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.prisma.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
   }
 }
