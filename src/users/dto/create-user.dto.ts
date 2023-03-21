@@ -12,6 +12,4 @@ export class CreateUserDto {
   username: string;
   @ApiProperty({ required: false, default: new Date() })
   updatedAt: Date;
-  @ApiProperty({ required: false, default: [] })
-  cart: Cart[];
 }
